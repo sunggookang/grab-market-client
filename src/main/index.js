@@ -1,6 +1,7 @@
 import React from 'react';
 import "./index.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function MainPage() {
     const [products, setProducts] = React.useState([]);
@@ -17,12 +18,12 @@ function MainPage() {
         <div>
             <div id="header">
                 <div id="header-area">
-                    <img src="images/icons/logo.png" />
+                    <img src="images/icons/logo.png" alt="로고 이미지" />
                 </div>
             </div>
             <div id="body">
                 <div id="banner">
-                    <img src="images/banners/banner1.png" />
+                    <img src="images/banners/banner1.png" alt="배너 이미지" />
                 </div>
                 <h1>판매되는 상품들</h1>
                 <div id="product-list">
@@ -30,24 +31,26 @@ function MainPage() {
                         products.map(function (product, index) {
                             return (
                                 <div className="product-card">
-                                    <div>
-                                        <img className="product-img" src={product.imageUrl} />
-                                    </div>
-                                    <div className="product-contents">
-                                        <span className="product-name">{product.name}</span>
-                                        <span className="product-price">{product.price}원</span>
-                                        <div className="product-seller">
-                                            <img className="product-avatar" src="images/icons/avatar.png" />
-                                            <span>{product.seller}</span>
+                                    <Link className="product-link" to={`/products/${index}`}>
+                                        <div>
+                                            <img className="product-img" src={product.imageUrl} alt="상품 이미지" />
                                         </div>
-                                    </div>
+                                        <div className="product-contents">
+                                            <span className="product-name">{product.name}</span>
+                                            <span className="product-price">{product.price}원</span>
+                                            <div className="product-seller">
+                                                <img className="product-avatar" src="images/icons/avatar.png" alt="아바타 이미지" />
+                                                <span>{product.seller}</span>
+                                            </div>
+                                        </div>
+                                    </Link>
                                 </div>
                             )
                         })
                     }
-                    <div id="footer"></div>
                 </div>
             </div>
+            <div id="footer"></div>
         </div>
     );
 }
